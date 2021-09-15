@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "chamados-24194": {
+      "hosting": {
+        "app": [
+          "chamados-24194"
+        ]
+      }
+    }
+  }
+}

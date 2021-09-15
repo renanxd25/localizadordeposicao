@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Cadastro de usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-col>
+    <div class="ion-text-center">
+      <h1 center text-center>
+        <ion-icon name="planet" color="danger" class="icon-7em"></ion-icon>
+      </h1>
+    </div>
+  </ion-col>
+  <form class="form" [formGroup]="userForm" (ngSubmit)="signUp(userForm.value)">
+    <ion-item color="Light">
+      <ion-label position="floating" color="primary">Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+    
+    <ng-container *ngFor="let error of error_msg.email">
+      <div *ngIf="userForm.get('email').hasError(error.type) && (userForm.get('email').dirty || userForm.get('email').touched)">
+        {{ error.message }}
+      </div>
+    </ng-container>
+
+    <ion-item color="Light">
+      <ion-label position="floating" color="primary">Senha</ion-label>
+      <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
+    </ion-item>
+    
+    <ng-container *ngFor="let error of error_msg.password">
+        <div *ngIf="userForm.get('password').hasError(error.type) && (userForm.get('password').dirty || userForm.get('password').touched)">
+          {{ error.message }}
+        </div>
+    </ng-container>
+
+    <ion-button type="submit" expand="block" [disabled]="!userForm.valid">Cadastrar</ion-button>
+    
+    <label class="ion-text-center" color="danger">{{errorMsg}}</label>
+    <label class="ion-text-center" color="success">{{successMsg}}</label>
+  </form>
+  <p class="ion-text-center">Ja é cadastrado? <a (click)="goToLogin()">Entrar</a></p>
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Mapa
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card color="primary">
+    <ion-card-content>
+        Bem Vindo!
+        <p>Email : <strong>{{ userDetail }}</strong></p>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Mapa</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card >
+    <div #mapElement class="map"></div>
+    <ion-card-header color="primary" >
+      <ion-card-header >
+        <ion-card-subtitle>Sua Localização</ion-card-subtitle>
+        <ion-card-title >{{cidade}}, {{estado}}, {{pais}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Endereço: {{endereco}}
+      </ion-card-content>
+    </ion-card-header>
+  </ion-card>
+  <ion-button type="submit" color="danger" expand="block" (click)="salvarposicao()">Salvar Posicao</ion-button>
+  <ion-button type="submit" color="danger" expand="block" (click)="metodo_sair_do_map()">Sair</ion-button>
+</ion-content>
