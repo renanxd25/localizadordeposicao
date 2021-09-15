@@ -3,6 +3,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AutenticacaoService } from '../services/autenticacao.service';
 import { Router } from "@angular/router";
 import {AngularFirestore} from '@angular/fire/firestore'
+import { FirebaseApp } from '@angular/fire';
+import {AngularFireDatabase} from '@angular/fire/database'
 
 
 
@@ -31,6 +33,7 @@ export class HomePage implements AfterViewInit{
     private router: Router,
     private AutenticacaoService: AutenticacaoService,
     private afs: AngularFirestore,
+    private db: AngularFireDatabase
     ) {}
 
   loadMap(){
@@ -48,12 +51,13 @@ export class HomePage implements AfterViewInit{
           if (response.results[0]) {
              this.localizacaoFinal = response.results[0].formatted_address;
             console.log(this.localizacaoFinal);
-            /*try{
-               this.afs.collection(this.AutenticacaoService.)
-            }catch(error){
-              console.log(error)
-            }*/
-           
+            //salvandoposição no banco de dados RealtimeDataBase automaticamente
+            this.db.database.ref('Usuarios').push(this.localizacaoFinal).then(()=>{
+              console.log("Salvou")
+            }).catch(() =>{
+              console.log("Não Salvou")
+            });
+
             this.endereco = response.results[0].formatted_address;
             if(response.results[0].address_components.length > 0){
               response.results[0].address_components.forEach(item =>{
@@ -111,8 +115,12 @@ export class HomePage implements AfterViewInit{
       })
   }
 
-  salvarposicao() {
-    
+   salvarposicao() {
+    this.db.database.ref('Posicao').push(this.localizacaoFinal).then(()=>{
+      console.log("Salvou")
+    }).catch(() =>{
+      console.log("Não Salvou")
+    });
   }
 
 }

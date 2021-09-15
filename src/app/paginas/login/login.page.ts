@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
   userForm: FormGroup;
   successMsg: string = '';
   errorMsg: string = '';
-  brunaferraz;
+
 
   error_msg = {
     'email': [
@@ -62,8 +62,7 @@ export class LoginPage implements OnInit {
   metodo_de_login(value) {
     this.ionicAuthService.metodo_logar(value)
       .then((response) => {
-         this.brunaferraz = response
-        console.log(this.brunaferraz)
+        console.log(response)
         this.errorMsg = "";
         this.router.navigateByUrl('home');
       }, error => {
