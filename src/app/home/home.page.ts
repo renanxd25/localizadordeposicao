@@ -17,7 +17,7 @@ declare var google;
 })
 export class HomePage implements AfterViewInit{
   map;
-  userDetail: string;
+  detalhesusuario: string;
   @ViewChild('mapElement', {static: false}) mapElement;
   mapOptions = {
     center: {lat:-34.391, lng:150.644},
@@ -28,6 +28,7 @@ export class HomePage implements AfterViewInit{
   estado;
   pais;
   localizacaoFinal;
+  posicaousuario: string;
   constructor(
     private geolocation:Geolocation,
     private router: Router,
@@ -50,6 +51,7 @@ export class HomePage implements AfterViewInit{
       geocoder.geocode({ location: Currentposition }).then((response) => {
           if (response.results[0]) {
              this.localizacaoFinal = response.results[0].formatted_address;
+
             console.log(this.localizacaoFinal);
             //salvandoposição no banco de dados RealtimeDataBase automaticamente
             this.db.database.ref('Usuarios').push(this.localizacaoFinal).then(()=>{
@@ -97,7 +99,8 @@ export class HomePage implements AfterViewInit{
   ngOnInit() {
     this.AutenticacaoService.userDetails().subscribe(response => {
       if (response !== null) {
-        this.userDetail = response.email;
+        this.detalhesusuario = response.email;
+        this.posicaousuario = response.uid
       } else {
         this.router.navigateByUrl('');
       }
@@ -116,7 +119,7 @@ export class HomePage implements AfterViewInit{
   }
 
    salvarposicao() {
-    this.db.database.ref('Posicao').push(this.localizacaoFinal).then(()=>{
+    this.db.database.ref(this.posicaousuario).push(this.localizacaoFinal).then(()=>{
       console.log("Salvou")
     }).catch(() =>{
       console.log("Não Salvou")
