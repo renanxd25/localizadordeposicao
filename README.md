@@ -3,6 +3,6 @@ Um localizador de posição do dispositivo do usuário. Nesse app é possível o
 ![Alt text](https://github.com/renanxd25/localizadordeposicao/blob/main/localizador.gif?raw=true "Demonstração")
 
 INSTALAÇÃO <br>
-»» Clone o projeto
-»» npm install
-»» ionic serve
+»» Clone o projeto <br>
+»» npm install <br>
+»» ionic serve <br>
