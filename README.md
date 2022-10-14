@@ -1,5 +1,5 @@
 
-# Link do Deploy do projeto. ultilize em Real time <br>
+# Link do Deploy do projeto. <br>
 http://localizadordeposicao.vercel.app/
 
 # Demonstração <br>
